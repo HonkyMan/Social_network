@@ -1,0 +1,209 @@
+$navBgColor-l: #F7F7F7
+$navBorderColor-l: #C2C2C2
+$navLiHoverBgColor-l: #D9D9D9
+$navFontColor-l: #263238
+
+$navBgColor-d: #263238
+$navBorderColor-d: #4f5b62
+$navLiHoverBgColor-d: #4f5b62
+$navFontColor-d: #D9D9D9
+
+/*Норм меню*/
+
+.nav
+    background-color: #fff
+    +xs-block()
+        padding: 5px
+
+    &-border
+        width: 5px
+        height: 0
+        background-color: $dark
+        position: absolute
+
+    &-wrapper
+        background-color: #fff
+        display: flex
+        flex-direction: row
+
+        +xs-block()
+            flex-wrap: wrap
+            justify-content: space-between
+    
+    &-brand
+        z-index: 4
+        display: none
+        justify-content: center
+        align-items: center
+        color: $white
+        
+        +xs-block()
+            display: flex
+            
+            img
+                height: 40px
+
+            .heading
+                letter-spacing: 1px
+                line-height: 40px
+    
+    &-toggler
+        display: none
+        &:checked ~ .nav_content
+            z-index: 99999
+            transform: translateY(0)
+            opacity: 1
+            max-height: 2000px
+            transition: all 1s ease-in
+        
+        /*Не работает*/
+        &:checked ~ .nav-toggler-label:after
+            content: '\2715'
+                
+    
+    &-toggler-label
+        z-index: 4
+        display: none
+        cursor: pointer
+        padding: 10px 15px
+        color: $navFontColor-d
+        float: right
+
+        +xs(display, block)
+
+        &:after 
+            content: '\2630'
+            text-decoration: none
+            font-size: 22px
+        
+    
+    &_content
+        z-index: 99999
+        width: 100%    
+        display: flex
+        flex-direction: row
+        align-items: center
+        justify-content: space-between
+        //margin: 0 15px
+
+        +sm(flex-direction, column)
+        +xs-block()
+            display: none
+        
+
+        &:hover
+            display: flex
+
+    &-active
+        &>.nav-border
+            height: 100%
+            +xs-block()
+                height: 1px
+                width: 100%
+                bottom: 0
+    
+    &-ul_wrapper
+        list-style: none    
+        display: flex
+        flex-direction: row
+        align-items: center
+        justify-content: space-between
+        flex-wrap: wrap
+        width: 100%
+
+        +xs(flex-direction, column)
+
+        li
+            transition-duration: .5s
+            position: relative
+            +xs(width, 100%)
+            a
+                display: block
+                padding: 5px 5px 5px 10px
+                color: $text
+                transition: .5s
+                text-decoration: none
+                text-align: center
+                
+                +xs-block()
+                    box-sizing: border-box
+                    padding: 15px
+
+                &.search
+                    padding-right: 0 
+
+                &.btn
+                    color: $text
+                    background-color: #fff
+            &>.nav-border
+                    transition-duration: .5s
+
+            &:hover
+                transition-duration: .5s
+
+                &>.nav-border
+                    height: 100%
+                    +xs-block()
+                        height: 1px
+                        width: 100%
+                        bottom: 0
+
+    .search-wrap
+        //width: 200px
+        +md(width, auto)
+        .search
+            padding: 0 15px
+            text-align: right
+
+            +xs(text-align, center)
+
+            i
+                color: $text
+                cursor: pointer
+                transition-duration: .5s
+                &:hover
+                    color: $dark
+                    transition-duration: .5s
+
+.search-field
+    background-color: $white
+    display: none
+    padding: 15px
+
+    +xs-block()
+        background-color: #fff
+        box-shadow: none
+        display: none
+
+    .nav-form
+        position: relative
+        flex-direction: row
+        +row-flex()
+
+        input
+            +col()
+            +size(10)
+            +size-xs(12)
+            border: none
+            box-shadow: 0 5px 30px rgba($text, .4)
+            height: 50px
+
+            +xs-block()
+                margin-bottom: 15px
+    
+    input[type=submit]
+        margin-top: 0
+        +col()
+        +size(2)
+        +size-xs(12)
+
+        // height: 35px
+        // border: none
+        // background-color: rgba(#fff, .9)
+        // box-sizing: border-box
+        // text-transform: uppercase
+        // line-height: 40px
+        // font-size: 16px
+        // cursor: pointer
+        // +xs(border, 1px solid $dark)
+        // +xs(line-height, 35px)
