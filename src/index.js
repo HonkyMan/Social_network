@@ -7,30 +7,33 @@ import Footer from './components/footer/footer';
 import TopMenu from './components/header/top-menu';
 import MainMenu from './components/header/main-menu';
 import './assets/prestyles/style.sass';
-import Dialogs from './components/dislogs/Dislogs';
 import { BrowserRouter, Route } from 'react-router-dom';
+import store from './redux/redux-store';
+import DialogsContainer from './components/dislogs/DialogsContainer';
+import { Provider } from 'react-redux';
 // import state from '../src/redux/state';
-import store from './redux/state';
 
-let renderDOMTree = (state) => {
-    ReactDOM.render(
-        <React.StrictMode>
-            <BrowserRouter>
+ReactDOM.render(
+    <React.StrictMode>
+        <BrowserRouter>
+            <Provider store={store}>
                 <header>
                     <TopMenu />
                     <MainMenu />
                 </header>
-                <Route path="/dialogs" render={() => <Dialogs state={state.messagesPage} dispatch={store.dispatch.bind(store)} />} />
-                <Route path="/profile" render={() => <MainContent state={state.profilePage} dispatch={store.dispatch.bind(store)} />} />
+                <Route path="/dialogs" render={() => <DialogsContainer />} />
+                <Route path="/profile" render={() => <MainContent />} />
                 <Footer />
-            </BrowserRouter>
-        </React.StrictMode>,
-        document.querySelector('body')
-    )
-};
-renderDOMTree(store.state);
+            </Provider>
+        </BrowserRouter>
+    </React.StrictMode>,
+    document.querySelector('body')
+)
 
-store.subscribe(renderDOMTree);
+// store.subscribe(() => {
+//     let state = store.getState();
+//     renderDOMTree(state);
+// });
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
